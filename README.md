@@ -5,7 +5,7 @@ How to run
 1. Install and start mongodb database.
 1. Add index for text search:
 
-       db.reviews.createIndex({artist: "text", title: "text"})
+       db.songs.createIndex({artist: "text", title: "text"})
 1. Change database name in settings.py
 1. Make virtual environment for python and install requirements:
 
@@ -20,3 +20,12 @@ How to run
 1. Start flask server:
 
         flask run
+
+How to run tests
+----------------
+
+1. In project's directory run command. 
+    
+        pip install -e .
+ 
+1. Run `pytest`.

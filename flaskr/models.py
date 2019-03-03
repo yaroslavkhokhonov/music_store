@@ -18,5 +18,5 @@ class Song(db.Document):
             'title': self.title,
             'difficulty': self.difficulty,
             'level': self.level,
-            'released': str(self.released),
+            'released': str(self.released.date()),
         }

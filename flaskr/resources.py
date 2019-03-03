@@ -45,7 +45,7 @@ class SongPollResource(Resource):
         song_id = request.form.get('song_id')
         rating_str = request.form.get('rating')
 
-        if not rating_str.isdigit():
+        if not rating_str or not rating_str.isdigit():
             abort(400)
         rating = int(rating_str)
 
@@ -71,13 +71,15 @@ class SongDifficultyStatResource(Resource):
         pipeline.append({
             '$group': {
                 '_id': None,
-                'result': {'$sum': '$difficulty'}
+                'result': {'$avg': '$difficulty'}
             }
         })
         cursor = db.session.db.Song.aggregate(pipeline=pipeline, cursor={})
 
         for doc in cursor:
             return {'average_difficulty': doc['result']}
+        else:
+            return {'average_difficulty': None}
 
 
 class SongRatingStatResource(Resource):
